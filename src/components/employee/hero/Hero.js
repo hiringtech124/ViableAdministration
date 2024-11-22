@@ -8,7 +8,7 @@ import axios from 'axios';
 function Hero() {
     const [searchQuery, setSearchQuery] = useState('');
     const [tasks, setTasks] = useState([])
-
+    const api = process.env.REACT_APP_API_ENDPOINT;
     const [showPopUpDetail, setShowPopUpDetail] = useState(false);
     const [employeeName, setEmployeeName] = useState('');
     const [taskId, setTaskId] = useState('')
@@ -25,7 +25,7 @@ function Hero() {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await axios.get('https://viable-backend.vercel.app/tasks');
+                const response = await axios.get(`${api}/tasks`);
                 // Filter tasks to include only those matching the employeeId
                 const filteredTasks = response.data.filter(task => task.employeeId === employeeId);
                 setTasks(filteredTasks);
@@ -101,7 +101,7 @@ function Hero() {
         }
 
         try {
-            const response = await axios.post('https://viable-backend.vercel.app/updatetask', formData, {
+            const response = await axios.post(`${api}/updateTask`, formData, {
                 'Content-Type': 'multipart/form-data'
             });
 

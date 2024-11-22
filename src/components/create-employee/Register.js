@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FaRegEyeSlash, FaRegCopy } from "react-icons/fa6"; // Import the copy icon
 
+
+
 function Register() {
     const [photo, setPhoto] = useState(null);
     const [uploadMessage, setUploadMessage] = useState('');
@@ -14,6 +16,8 @@ function Register() {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [copyMessage, setCopyMessage] = useState(''); // New state for copy message
+
+    const api = process.env.REACT_APP_API_ENDPOINT;
 
 
 
@@ -54,7 +58,7 @@ function Register() {
         formData.append('designation', designation);
 
         try {
-            const response = await fetch('https://viable-backend.vercel.app/register', {
+            const response = await fetch(`${api}/register`, {
                 method: 'POST',
                 body: formData,
             });

@@ -19,12 +19,12 @@ function Hero() {
     const [files, setFiles] = useState([]);
     const [refreshTasks, setRefreshTasks] = useState(false);
     const [uploadMessage, setUploadMessage] = useState('');
-
+    const api = process.env.REACT_APP_API_ENDPOINT;
 
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await axios.get('https://viable-backend.vercel.app/tasks');
+                const response = await axios.get(`${api}/tasks`);
                 setTasks(response.data);
             } catch (error) {
                 console.error('Error fetching tasks:', error);
@@ -100,7 +100,7 @@ function Hero() {
         }
 
         try {
-            const response = await axios.post('https://viable-backend.vercel.app/updatetask', formData, {
+            const response = await axios.post(`${api}/updateTask`, formData, {
                 'Content-Type': 'multipart/form-data'
             });
 

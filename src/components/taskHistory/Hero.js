@@ -15,11 +15,12 @@ const Hero = () => {
     const [documents, setDocuments] = useState([]);
     const [files, setFiles] = useState([]);
     const [uploadMessage, setUploadMessage] = useState('');
+    const api = process.env.REACT_APP_API_ENDPOINT;
 
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await axios.get('https://viable-backend.vercel.app/tasksHistory');
+                const response = await axios.get(`${api}/taskHistory`);
                 setTasks(response.data);
             } catch (error) {
                 console.error('Error fetching tasks:', error);

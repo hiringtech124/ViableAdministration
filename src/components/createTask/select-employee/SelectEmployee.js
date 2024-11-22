@@ -14,11 +14,12 @@ function SelectEmployee() {
     const [selectedEmployeeIndex, setSelectedEmployeeIndex] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const api = process.env.REACT_APP_API_ENDPOINT;
 
     useEffect(() => {
         const fetchEmployees = async () => {
             try {
-                const response = await axios.get('https://viable-backend.vercel.app/users');
+                const response = await axios.get(`${api}/users`);
                 setEmployees(response.data);
             } catch (error) {
                 console.error('Error fetching employees:', error);

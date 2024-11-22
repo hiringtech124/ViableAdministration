@@ -10,7 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
-
+  const api = process.env.REACT_APP_API_ENDPOINT;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('https://viable-backend.vercel.app/login', { email, password }, {
+    await axios.post(`${api}/login`, { email, password }, {
       Headers: {
         'Content-Type': 'application/json',
       },
@@ -35,7 +35,7 @@ const Login = () => {
         dispatch(login(data));
         const userToken = data.accessToken;
         localStorage.setItem('token', userToken)
-        if (data.userData.status === 'Owner') {
+        if (data.userData.status === 'owner') {
           navigate('/owner');
         } else if(data.userData.status === 'employee'){
           navigate('/employee');
